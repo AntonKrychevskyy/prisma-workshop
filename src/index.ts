@@ -1,12 +1,12 @@
-import { PrismaClient } from "@prisma/client";
-import express from "express";
+import { PrismaClient } from '@prisma/client';
+import express from 'express';
 
 const prisma = new PrismaClient();
 const app = express();
 
 app.use(express.json());
 
-app.get("/users", async (req, res) => {
+app.get('/users', async (req, res) => {
   // const result = TODO
   // res.json(result)
 });
@@ -27,7 +27,7 @@ app.post(`/post`, async (req, res) => {
   // res.json(result)
 });
 
-app.put("/post/:id/views", async (req, res) => {
+app.put('/post/:id/views', async (req, res) => {
   const { id } = req.params;
 
   // const result = TODO
@@ -35,7 +35,7 @@ app.put("/post/:id/views", async (req, res) => {
   // res.json(result)
 });
 
-app.put("/publish/:id", async (req, res) => {
+app.put('/publish/:id', async (req, res) => {
   const { id } = req.params;
 
   // const result = TODO
@@ -43,7 +43,7 @@ app.put("/publish/:id", async (req, res) => {
   // res.json(result)
 });
 
-app.get("/user/:id/drafts", async (req, res) => {
+app.get('/user/:id/drafts', async (req, res) => {
   const { id } = req.params;
 
   // const result = TODO
@@ -59,7 +59,7 @@ app.get(`/post/:id`, async (req, res) => {
   // res.json(result)
 });
 
-app.get("/feed", async (req, res) => {
+app.get('/feed', async (req, res) => {
   const { searchString, skip, take } = req.query;
 
   // const result = TODO
@@ -67,6 +67,4 @@ app.get("/feed", async (req, res) => {
   // res.json(result)
 });
 
-app.listen(3000, () =>
-  console.log(`🚀 Server ready at: http://localhost:3000`)
-);
+app.listen(3000, () => console.log(`🚀 Server ready at: http://localhost:3000`));
