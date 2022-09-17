@@ -58,9 +58,13 @@ app.put('/post/:id/views', async (req, res) => {
 app.put('/publish/:id', async (req, res) => {
   const { id } = req.params;
 
-  // const result = TODO
-
-  // res.json(result)
+  const result = await prisma.post.update({
+    where: { id: Number(id) },
+    data: {
+      published: true,
+    },
+  });
+  res.json(result);
 });
 
 app.get('/user/:id/drafts', async (req, res) => {
