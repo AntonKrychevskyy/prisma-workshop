@@ -7,8 +7,14 @@ const app = express();
 app.use(express.json());
 
 app.get('/users', async (req, res) => {
-  // const result = TODO
-  // res.json(result)
+  const result = await prisma.user.findMany({
+    select: {
+      id: true,
+      name: true,
+      email: true,
+    },
+  });
+  res.json(result);
 });
 
 app.post(`/signup`, async (req, res) => {
