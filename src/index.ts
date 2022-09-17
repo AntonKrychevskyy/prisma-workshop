@@ -44,9 +44,15 @@ app.post(`/post`, async (req, res) => {
 app.put('/post/:id/views', async (req, res) => {
   const { id } = req.params;
 
-  // const result = TODO
-
-  // res.json(result)
+  const result = await prisma.post.update({
+    where: { id: Number(id) },
+    data: {
+      viewCount: {
+        increment: 1,
+      },
+    },
+  });
+  res.json(result);
 });
 
 app.put('/publish/:id', async (req, res) => {
