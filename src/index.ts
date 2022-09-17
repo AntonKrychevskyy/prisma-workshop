@@ -29,9 +29,16 @@ app.post(`/signup`, async (req, res) => {
 app.post(`/post`, async (req, res) => {
   const { title, content, authorEmail } = req.body;
 
-  // const result = TODO
-
-  // res.json(result)
+  const result = await prisma.post.create({
+    data: {
+      title,
+      content,
+      author: {
+        connect: { email: authorEmail },
+      },
+    },
+  });
+  res.json(result);
 });
 
 app.put('/post/:id/views', async (req, res) => {
