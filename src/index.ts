@@ -20,9 +20,10 @@ app.get('/users', async (req, res) => {
 app.post(`/signup`, async (req, res) => {
   const { name, email } = req.body;
 
-  // const result = TODO
-
-  // res.json(result)
+  const result = await prisma.user.create({
+    data: { name, email },
+  });
+  res.json(result);
 });
 
 app.post(`/post`, async (req, res) => {
