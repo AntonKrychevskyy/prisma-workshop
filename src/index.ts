@@ -88,7 +88,9 @@ const resolvers = {
   },
   Mutation: {
     signupUser: (_parent, args: { name: string | undefined; email: string }, context: Context) => {
-      // TODO
+      return context.prisma.user.create({
+        data: { email: args.email, name: args.name },
+      });
     },
     createDraft: (
       _parent,
