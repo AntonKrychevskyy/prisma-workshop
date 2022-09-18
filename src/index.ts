@@ -108,7 +108,10 @@ const resolvers = {
       });
     },
     incrementPostViewCount: (_parent, args: { id: number }, context: Context) => {
-      // TODO
+      return context.prisma.post.update({
+        where: { id: Number(args.id) },
+        data: { viewCount: { increment: 1 } },
+      });
     },
     deletePost: (_parent, args: { id: number }, context: Context) => {
       // TODO
