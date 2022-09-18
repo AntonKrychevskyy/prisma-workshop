@@ -78,7 +78,12 @@ const resolvers = {
       });
     },
     draftsByUser: (_parent, args: { id: number }, context: Context) => {
-      // TODO
+      return context.prisma.post.findMany({
+        where: {
+          published: false,
+          authorId: Number(args.id),
+        },
+      });
     },
   },
   Mutation: {
