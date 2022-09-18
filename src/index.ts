@@ -130,7 +130,11 @@ const resolvers = {
   },
   User: {
     posts: (parent, _args, context: Context) => {
-      return [];
+      return context.prisma.user
+        .findUnique({
+          where: { id: Number(parent.id) },
+        })
+        .posts();
     },
   },
   DateTime: DateTimeResolver,
