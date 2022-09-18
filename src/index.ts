@@ -114,7 +114,9 @@ const resolvers = {
       });
     },
     deletePost: (_parent, args: { id: number }, context: Context) => {
-      // TODO
+      return context.prisma.post.delete({
+        where: { id: Number(args.id) },
+      });
     },
   },
   Post: {
