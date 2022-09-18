@@ -84,7 +84,11 @@ const resolvers = {
   },
   Post: {
     author: (parent, _args, context: Context) => {
-      return null;
+      return context.prisma.post
+        .findUnique({
+          where: { id: Number(parent.id) },
+        })
+        .author();
     },
   },
   User: {
