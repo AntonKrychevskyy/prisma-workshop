@@ -1,7 +1,7 @@
-import { ApolloServer } from "apollo-server";
-import { DateTimeResolver } from "graphql-scalars";
-import { Context, context } from "./context";
-import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
+import { ApolloServer } from 'apollo-server';
+import { DateTimeResolver } from 'graphql-scalars';
+import { Context, context } from './context';
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 
 const typeDefs = `
 type Query {
@@ -63,11 +63,7 @@ const resolvers = {
     },
   },
   Mutation: {
-    signupUser: (
-      _parent,
-      args: { name: string | undefined; email: string },
-      context: Context
-    ) => {
+    signupUser: (_parent, args: { name: string | undefined; email: string }, context: Context) => {
       // TODO
     },
     createDraft: (
@@ -77,11 +73,7 @@ const resolvers = {
     ) => {
       // TODO
     },
-    incrementPostViewCount: (
-      _parent,
-      args: { id: number },
-      context: Context
-    ) => {
+    incrementPostViewCount: (_parent, args: { id: number }, context: Context) => {
       // TODO
     },
     deletePost: (_parent, args: { id: number }, context: Context) => {
@@ -107,6 +99,4 @@ const server = new ApolloServer({
   context,
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 });
-server.listen({ port: 4000 }, () =>
-  console.log(`🚀 Server ready at: http://localhost:4000`)
-);
+server.listen({ port: 4000 }, () => console.log(`🚀 Server ready at: http://localhost:4000`));
