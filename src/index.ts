@@ -97,7 +97,15 @@ const resolvers = {
       args: { title: string; content: string | undefined; authorEmail: string },
       context: Context
     ) => {
-      // TODO
+      return context.prisma.post.create({
+        data: {
+          title: args.title,
+          content: args.content,
+          author: {
+            connect: { email: args.authorEmail },
+          },
+        },
+      });
     },
     incrementPostViewCount: (_parent, args: { id: number }, context: Context) => {
       // TODO
