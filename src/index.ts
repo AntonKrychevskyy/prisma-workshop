@@ -70,9 +70,10 @@ app.put('/publish/:id', async (req, res) => {
 app.get('/user/:id/drafts', async (req, res) => {
   const { id } = req.params;
 
-  // const result = TODO
-
-  // res.json(result)
+  const result = await prisma.post.findMany({
+    where: { authorId: Number(id), published: false },
+  });
+  res.json(result);
 });
 
 app.get(`/post/:id`, async (req, res) => {
