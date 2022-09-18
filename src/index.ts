@@ -45,7 +45,9 @@ const resolvers = {
       return context.prisma.user.findMany();
     },
     postById: (_parent, args: { id: number }, context: Context) => {
-      // TODO
+      return context.prisma.post.findUnique({
+        where: { id: Number(args.id) },
+      });
     },
     feed: (
       _parent,
