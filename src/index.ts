@@ -79,9 +79,10 @@ app.get('/user/:id/drafts', async (req, res) => {
 app.get(`/post/:id`, async (req, res) => {
   const { id } = req.params;
 
-  // const result = TODO
-
-  // res.json(result)
+  const result = await prisma.post.findUnique({
+    where: { id: Number(id) },
+  });
+  res.json(result);
 });
 
 app.get('/feed', async (req, res) => {
