@@ -58,7 +58,24 @@ const resolvers = {
       },
       context: Context
     ) => {
-      // TODO
+      const searchCondition = args.searchString
+        ? {
+            OR: [
+              { title: { contains: args.searchString } },
+              { content: { contains: args.searchString } },
+            ],
+          }
+        : {};
+
+      return context.prisma.post.findMany({
+        where: {
+          published: true,
+          ...searchCondition,
+        },
+        orderBy: { createdAt: 'desc' },
+        skip: args.skip,
+        take: args.take,
+      });
     },
     draftsByUser: (_parent, args: { id: number }, context: Context) => {
       // TODO
