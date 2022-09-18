@@ -86,11 +86,27 @@ app.get(`/post/:id`, async (req, res) => {
 });
 
 app.get('/feed', async (req, res) => {
-  const { searchString, skip, take } = req.query;
+  const { searchString, skip = 0, take = 100 } = req.query;
 
-  // const result = TODO
+  const searchCriteria = searchString
+    ? {
+        OR: [
+          { title: { contains: searchString as string } },
+          { content: { contains: searchString as string } },
+        ],
+      }
+    : {};
 
-  // res.json(result)
+  const result = await prisma.post.findMany({
+    orderBy: { id: 'desc' },
+    where: {
+      ...searchCriteria,
+      published: true,
+    },
+    skip: Number(skip),
+    take: Number(take),
+  });
+  res.json(result);
 });
 
 app.listen(3000, () => console.log(`🚀 Server ready at: http://localhost:3000`));
