@@ -42,7 +42,7 @@ scalar DateTime
 const resolvers = {
   Query: {
     allUsers: (_parent, _args, context: Context) => {
-      // TODO
+      return context.prisma.user.findMany();
     },
     postById: (_parent, args: { id: number }, context: Context) => {
       // TODO
